@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "691782248722",
+    "firebase_url": "https://byteme-2d69c.firebaseio.com",
+    "project_id": "byteme-2d69c",
+    "storage_bucket": "byteme-2d69c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691782248722:android:49cec8a311a24343",
+        "android_client_info": {
+          "package_name": "com.example.byteme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691782248722-ne92odevdn02glcjfsj3jpu5ta9i6s1s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.byteme",
+            "certificate_hash": "dd7453de884a27f122f3c73ed8bc5e4b0816bea5"
+          }
+        },
+        {
+          "client_id": "691782248722-3k2cnvpg7h00bjtb46tgpbmd07g5368n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDu_Aem7WCY3a0iH-78a1DmsjGW8ipkVHE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691782248722-3k2cnvpg7h00bjtb46tgpbmd07g5368n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
