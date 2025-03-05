@@ -86,12 +86,12 @@ def update(cycle,check,event_number,x):
 window = tk.Tk()
 
 #call buddy's action gif
-idle = [tk.PhotoImage(file='idle.gif',format = 'gif -index %i' %(i)) for i in range(5)]#idle gif , 5 frames
-idle_to_sleep = [tk.PhotoImage(file='changing.gif',format = 'gif -index %i' %(i)) for i in range(8)]#idle to sleep gif, 8 frames
-sleep = [tk.PhotoImage(file='sleeping.gif',format = 'gif -index %i' %(i)) for i in range(3)]#sleep gif, 3 frames
-sleep_to_idle = [tk.PhotoImage(file='waking.gif',format = 'gif -index %i' %(i)) for i in range(8)]#sleep to idle gif, 8 frames
-walk_positive = [tk.PhotoImage(file='left.gif',format = 'gif -index %i' %(i)) for i in range(8)]#walk to left gif, 8 frames
-walk_negative = [tk.PhotoImage(file='right.gif',format = 'gif -index %i' %(i)) for i in range(8)]#walk to right gif, 8 frames
+idle = [tk.PhotoImage(file='Coding-Practice\Python_GIF\idle.gif',format = 'gif -index %i' %(i)) for i in range(5)]#idle gif , 5 frames
+idle_to_sleep = [tk.PhotoImage(file='Coding-Practice\Python_GIF\changing.gif',format = 'gif -index %i' %(i)) for i in range(8)]#idle to sleep gif, 8 frames
+sleep = [tk.PhotoImage(file='Coding-Practice\Python_GIF\sleeping.gif',format = 'gif -index %i' %(i)) for i in range(3)]#sleep gif, 3 frames
+sleep_to_idle = [tk.PhotoImage(file='Coding-Practice\Python_GIF\waking.gif',format = 'gif -index %i' %(i)) for i in range(8)]#sleep to idle gif, 8 frames
+walk_positive = [tk.PhotoImage(file='Coding-Practice\Python_GIF\left.gif',format = 'gif -index %i' %(i)) for i in range(8)]#walk to left gif, 8 frames
+walk_negative = [tk.PhotoImage(file='Coding-Practice\Python_GIF\\right.gif',format = 'gif -index %i' %(i)) for i in range(8)]#walk to right gif, 8 frames
 
 #window configuration
 window.config(highlightbackground='black')
