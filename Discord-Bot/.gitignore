@@ -1,0 +1,14 @@
+#ignore all .env files
+.env
+
+#ignore all LOG files
+*.log
+
+# ignore ALL files in the friends directory
+Friends/
+
+# ignore files related to the FFmpeg executables
+FFmpeg/
+
+# ignore files related to the credentials from google
+*.json
