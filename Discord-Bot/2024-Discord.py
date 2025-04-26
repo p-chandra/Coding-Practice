@@ -45,8 +45,8 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
 ))
 
 #FOR LOCAL FILES
-friends_directory = 'Raspberry-4-Projects/Discord-Bot/Friends/'
-music_directory = 'Raspberry-4-Projects/Discord-Bot/music/'
+friends_directory = 'Friends/'
+music_directory = 'music/'
 
 #BOT PREFIX as in this is the symbol you must enter before a command. Ex .join .play
 bot = commands.Bot(command_prefix=".", intents=discord.Intents.all())
@@ -76,9 +76,9 @@ async def goodmorning(ctx):
 @bot.command(aliases=['rules'])
 async def rule(ctx,*,number):
     # Reading Rules from a text file.
-    f = open('Raspberry-4-Projects/Discord-Bot/rules.txt', 'r')
+    f = open('rules.txt', 'r')
     rules = f.readlines()
-    with open('Raspberry-4-Projects/Discord-Bot/rules.txt') as f:
+    with open('rules.txt') as f:
         count = sum(1 for _ in f)
 
     # check if the rule number arguement is a numeric value.
@@ -97,14 +97,14 @@ async def rule(ctx,*,number):
 #This command tells you what skin care you should use
 @bot.command(aliases=['skinroutine','skin'])
 async def skincare(ctx):
-    f = open('Raspberry-4-Projects/Discord-Bot/Skin_Care.txt', 'r')
+    f = open('Skin_Care.txt', 'r')
     skin_routine = f.read()
     await ctx.send(skin_routine)
 
 #This is just to show a picture of coconut. you can type .theboy or .cocoboy
 @bot.command(aliases=["theboy","cocoboy"])
 async def coconut(ctx):
-    await ctx.send(file=discord.File('Raspberry-4-Projects/Discord-Bot/coconut.png'))
+    await ctx.send(file=discord.File('coconut.png'))
 
 # This command goes inside the directory declare above "koopa" and pics a picture open up randomly
 # Though its odd because I dont specify the file type, it just opens up that file regardless 
@@ -120,7 +120,7 @@ async def friends(ctx):
         picture = discord.File(f)
         await ctx.send(file=picture)
 
-#(PART 1) This commaned goes to my local folder and plays a song
+#(PART 1) This command goes to my local folder and plays a song
 @bot.command()
 async def music(ctx):
     files = os.listdir(music_directory)
@@ -174,7 +174,7 @@ async def email(ctx):
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                "Raspberry-4-Projects\Discord-Bot\credentials.json", SCOPES
+                "credentials.json", SCOPES
             )
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
