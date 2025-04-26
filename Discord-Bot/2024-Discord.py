@@ -92,7 +92,11 @@ async def rule(ctx,*,number):
         for x in range(count):
             await ctx.send(rules[x])
     else:
-        await ctx.send('I see you are trying to test my code... stop it.')
+        await ctx.send('I see you are trying to test my code... stop it.') # this does not work. The error check at the bottom takes care of exceptions
+@rule.error
+async def greet_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send("You need to type in '.rules #'")
 
 #This command tells you what skin care you should use
 @bot.command(aliases=['skinroutine','skin'])
@@ -135,8 +139,10 @@ async def join(ctx):
     if (ctx.author.voice):
         channel = ctx.message.author.voice.channel
         voice = await channel.connect()
-        source = FFmpegPCMAudio('1.mp3')
-        player = voice.play(source)
+        
+        source = FFmpegPCMAudio('music/PlayedMe.mp3', executable="FFmpeg/ffmpeg.exe")
+        ctx.voice_client.play(source)
+        await ctx.send("Now playing your MP3!")
     else:
         await ctx.send('You gotta be in VC so I can join panget!')
 
