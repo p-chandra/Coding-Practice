@@ -23,7 +23,7 @@ if not token:
 # Use the token
 print(token)
 
-#pip install pynacl #this is so dicord can join vc
+#pip install pynacl #this is so discord can join vc
 #pip install python-dotenv
 #pip install discord.py
 #pip install spotipy
