@@ -47,6 +47,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
 #FOR LOCAL FILES
 friends_directory = 'Friends/'
 music_directory = 'music/'
+FFMPEG_PATH = 'FFmpeg/ffmpeg.exe'
 
 #BOT PREFIX as in this is the symbol you must enter before a command. Ex .join .play
 bot = commands.Bot(command_prefix=".", intents=discord.Intents.all())
@@ -139,10 +140,9 @@ async def join(ctx):
     if (ctx.author.voice):
         channel = ctx.message.author.voice.channel
         voice = await channel.connect()
-        
-        source = FFmpegPCMAudio('music/PlayedMe.mp3', executable="FFmpeg/ffmpeg.exe")
+        # if you check ffmpeg --version it will not show up. You need to add it to the path or point to the executable. I pointed mines
+        source = FFmpegPCMAudio('music/hello.mp3', executable=FFMPEG_PATH) # Plays this audio upon joining
         ctx.voice_client.play(source)
-        await ctx.send("Now playing your MP3!")
     else:
         await ctx.send('You gotta be in VC so I can join panget!')
 
@@ -155,12 +155,52 @@ async def leave(ctx):
     else:
         await ctx.send('Something went wrong and I cant leave')
 
+#(PART 3) Make discord bot leave VC
+@bot.command(pass_context = True)
+async def leave(ctx):
+    if (ctx.voice_client):
+        await ctx.guild.voice_client.disconnect()
+        await ctx.send('Adios :)')
+    else:
+        await ctx.send('Something went wrong and I cant leave')
+
+#(PART 4) Play a song in VC
+@bot.command(pass_context = True)
+async def play(ctx, *, search: str = None):
+    if not search:
+        return await ctx.send("Please provide a song name, like `!play name`.")
+
+    if not ctx.author.voice:
+        return await ctx.send("You need to join a voice channel first.")
+
+    # Search for file (case-insensitive match)
+    files = glob.glob(os.path.join(music_directory, "*.mp3"))
+    match = next((f for f in files if search.lower() in os.path.basename(f).lower()), None)
+
+    if not match:
+        return await ctx.send(f"No matching MP3 found for `{search}`.")
+    
+    source = discord.FFmpegPCMAudio(match, executable=FFMPEG_PATH)
+    ctx.voice_client.stop()  # stop any current audio
+    ctx.voice_client.play(source)
+
+    await ctx.send(f"Now playing: `{os.path.basename(match)}`")
+
 #USEFUL debugging command. This command counts the number of arguements passed to arg.
 @bot.command()
 async def arg(ctx,*args):
     await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
 
-#THIS command goes to my email, looks for emails from steam and prints the first few lines
+
+
+
+
+
+# PLEASE READ THIS
+### EMAIL ###
+# THIS command goes to my email, looks for emails from steam and prints the first few lines
+
+
 @bot.command()
 async def email(ctx):
     # Define the scope for Gmail API
@@ -220,8 +260,18 @@ async def email(ctx):
     except HttpError as error:
         await ctx.send(f"An error occurred: {error}")
 
+
+
+
+
+# PLEASE READ
+### SPOTIFY ###
+# This feature allows you to control your spotify with your discord bot
+# It unfortunately cannot play music through discord
+
+
 @bot.command(name="play")
-async def play(ctx, *, query: str):
+async def playsp(ctx, *, query: str):
     """Play a song on Spotify"""
     results = sp.search(q=query, type="track", limit=1)
     if results["tracks"]["items"]:
@@ -241,19 +291,19 @@ async def play(ctx, *, query: str):
         await ctx.send("Song not found.")
 
 @bot.command(name="pause")
-async def pause(ctx):
+async def pausesp(ctx):
     """Pause playback on Spotify"""
     sp.pause_playback()
     await ctx.send("Playback paused.")
 
 @bot.command(name="resume")
-async def resume(ctx):
+async def resumesp(ctx):
     """Resume playback on Spotify"""
     sp.start_playback()
     await ctx.send("Playback resumed.")
 
 @bot.command(name="skip")
-async def skip(ctx):
+async def skipsp(ctx):
     """Skip to the next song"""
     sp.next_track()
     await ctx.send("Skipped to the next track.")
