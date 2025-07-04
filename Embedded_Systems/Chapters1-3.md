@@ -73,3 +73,60 @@ Bus System - Handles routing of signals between cpu and memory. I/O ports, data 
     - Memory Address Bus (MAB) - provides a single address to data memory, program memory, and the I/O ports.
     - Memory Data Bus (MDB) - Carries information back and forth between the CPU and the memory & I/O ports
     - Memory Map - gives all the addresses for all locations in memory. So Data Memory, Program Memory, and I/O ports are assigned a unique address
+
+## 3.3 Computer Software
+We have a CPU that has a set of instructions that it knows how to execute. Things like the number of instructions it can execute, the memory size, etc is decided by the designer
+
+The set of instructions that a particular hardware can execute is called **Instruction Set**. Remember that the hardware is designed before hand, so you make the CPU, you make the micro-controller then you sell it. The person who buys the micro-controller writes the software for it. Intel, Texas Instrument, decide which instruction its going to execute. 
+
+RISC - Reduced Instruction Set Computer - Small number of instructions
+CISC - Complex Instruction Set Computer - Large number of instructions
+
+In the image below, a RISC architecture you will have very few instruction path and smaller list of codes where as the CISC would have a lot more instruction paths with longer set of instruction codes.  
+![alt text](image-4.png)
+
+Because RISC is fewer instructions it requires sometimes a larger number of operations to do something more complex where CISC is already complex and requires fewer instructions. However if the task is simple then the RISC architecture tends to have the advantage
+![alt text](image-5.png)
+
+
+### Classes of Instructions
+![alt text](<Screenshot 2025-07-01 170454.png>)
+
+**Data Movement** - Moving information between the CPU(Registers) and memory region or between two memory locations. Memory Region includes Data Memory, Program Memory, AND I/O Ports. 
+
+Remember that Memory Regions contain addresses and so the Data Movement Instructions might be moving say constants from Program Memory to Registers, or maybe theres something in the Data Memory the register needs or you might read from the port and place it in the registers. This data movement works vice versa.
+
+You're always moving back and forth from CPU(Registers) and Memory Region because Control Unit doesn't have storage, and neither does the ALU.
+
+**Data Manipulation**
+Use the ALU to perform arithmetic or logical operations on information. So in general, if you want to mess with data from the Data Memory, you would need to move the data from Data Memory to the Registers and the the ALU will manipulate the data and put it back into the register and then maybe move the data from the register to the I/O Port or something
+EXAMPLE: Addition, Subtractions, ANDs, XORs, Increments, Decrements, Bit-Sets, Bit-Clears
+
+**Program Flow Instructions**
+When you are reading OpCode from the Program Memory so reading code from say address 8000 then 8001 and 8002 (Remember reading is data moving from program memory to the register) you will eventually need to go back to the top of the address because micro-controllers run forever and in a loop so then what makes program jump back to the top. Thats when program flow instructions come in. Program Flow Instruction is the ability to alter the program counter to support looping and conditional statement functionality
+
+Unconditional Program Flow - always change the program counter to a fixed value
+
+Conditional Program Flow - only alter the program counter when certain conditions exist within the status register. This should sound familiar if you experience programming assembly. Literally do some condition, if the condition matches, set a flag, and if that flag is set then jump to a different point in address or whatever
+
+### OP CODES
+Unique binary code given to each instruction in the set.
+
+**Mnemonic** Descriptive name for the op-code that can be used when discussing the instruction functionality. So addition will have a mnemonic... ADD
+
+**Assembly** low-level language that uses mnemonics to communicate which instruction is being talked about
+
+**Assembler** translates mnemonics and additional information for each instruction into its specific op-code
+
+### Compiler
+At the highest level of program development, the language C can be used to develop programs without needing to understand the architecture of the CPU or how the internal registers are used to move and manipulate data.
+
+**Compiler** used to convert high-level programming constructs into individual assembly language instructions.
+
+**Assembler** used to translate the instructions mnemonics and operands into their corresponding binary codes
+
+**Linker** A tool withing the development flow that joins multiple source files and assigns the final addresses for the program code. The output of the linker stage is an **EXECUTABLE OBJECT FILE** which is a binary file, ready to be downloaded to the micro-controller using the EEPROM programmer. With an executable object file you can attach a debugger and follow instructions step by step.
+
+In the image below, the MSP430 is a micro-controller
+![alt text](image-6.png)
+
