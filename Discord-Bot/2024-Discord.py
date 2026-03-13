@@ -1,13 +1,13 @@
 import discord
+import glob
 import random
 from dotenv import load_dotenv
 import os
+import asyncio
 from discord.ext import commands
 from discord import FFmpegPCMAudio
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-
-import os.path
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -20,8 +20,8 @@ token = os.getenv("DISCORD_TOKEN")
 if not token:
     raise ValueError("No DISCORD_TOKEN found in the .env file.")
 
-# Use the token
-print(token)
+# Do not print the token directly; it is sensitive.
+print("Discord token loaded; starting bot...")
 
 #pip install pynacl #this is so dicord can join vc
 #pip install python-dotenv
@@ -34,7 +34,7 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 #FOR SPOTIFY API
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
-SPOTIFY_REDIRECT_URI = "http://localhost:8080"
+SPOTIFY_REDIRECT_URI = os.getenv("SPOTIFY_REDIRECT_URI")
 
 #Authenticate your credentials
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
@@ -46,8 +46,8 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
 
 #FOR LOCAL FILES
 friends_directory = 'Friends/'
-music_directory = 'music/'
-FFMPEG_PATH = 'FFmpeg/ffmpeg.exe'
+ipod_directory = 'E:\\Music-Old-IPod'
+FFMPEG_PATH = os.path.join(os.path.dirname(__file__), 'FFmpeg', 'bin', 'ffmpeg.exe')
 
 #BOT PREFIX as in this is the symbol you must enter before a command. Ex .join .play
 bot = commands.Bot(command_prefix=".", intents=discord.Intents.all())
@@ -56,6 +56,10 @@ bot = commands.Bot(command_prefix=".", intents=discord.Intents.all())
 @bot.event
 async def on_ready(): 
     print("Bot is Ready!")
+
+@bot.event
+async def on_error(event, *args, **kwargs):
+    print(f"Error in event {event}:", exc_info=True)
 
 
 # This command responds to the user who says hello
@@ -75,25 +79,29 @@ async def goodmorning(ctx):
 
 # This command displays the rules for the server.
 @bot.command(aliases=['rules'])
-async def rule(ctx,*,number):
-    # Reading Rules from a text file.
-    f = open('rules.txt', 'r')
-    rules = f.readlines()
-    with open('rules.txt') as f:
-        count = sum(1 for _ in f)
+async def rule(ctx, *, number):
+    try:
+        with open('rules.txt', 'r', encoding='utf-8') as f:
+            rules = [line.rstrip("\n") for line in f if line.strip()]
+    except FileNotFoundError:
+        await ctx.send('rules.txt not found.')
+        return
 
-    # check if the rule number arguement is a numeric value.
-    if (number.isnumeric()):
-        if (int(number) < count+1):
-            await ctx.send(rules[int(number)-1])
+    count = len(rules)
+
+    # check if the rule number argument is a numeric value.
+    if number.isnumeric():
+        idx = int(number) - 1
+        if 0 <= idx < count:
+            await ctx.send(rules[idx])
         else:
             await ctx.send(f'There is no rule {number}. So far there are only {count} rules.')
     # the number argument is a string so check to if string equals "all".
-    elif ((number) == "all"):
-        for x in range(count):
-            await ctx.send(rules[x])
+    elif number.lower() == "all":
+        for rule_text in rules:
+            await ctx.send(rule_text)
     else:
-        await ctx.send('I see you are trying to test my code... stop it.') # this does not work. The error check at the bottom takes care of exceptions
+        await ctx.send('Please provide a rule number or `all`.')
 @rule.error
 async def greet_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
@@ -102,8 +110,13 @@ async def greet_error(ctx, error):
 #This command tells you what skin care you should use
 @bot.command(aliases=['skinroutine','skin'])
 async def skincare(ctx):
-    f = open('Skin_Care.txt', 'r')
-    skin_routine = f.read()
+    try:
+        with open('Skin_Care.txt', 'r', encoding='utf-8') as f:
+            skin_routine = f.read()
+    except FileNotFoundError:
+        await ctx.send('Skin_Care.txt not found.')
+        return
+
     await ctx.send(skin_routine)
 
 #This is just to show a picture of coconut. you can type .theboy or .cocoboy
@@ -111,12 +124,12 @@ async def skincare(ctx):
 async def coconut(ctx):
     await ctx.send(file=discord.File('coconut.png'))
 
-# This command goes inside the directory declare above "koopa" and pics a picture open up randomly
+# This command goes inside the directory declare above "friends" and pics a picture open up randomly
 # Though its odd because I dont specify the file type, it just opens up that file regardless 
 #
 # files = [f for f in files if os.path.isfile(os.path.join(directory, f))] 
 #
-# line 64 fliters out directories and keeps only files so it opens only files
+# line 64 filters out directories and keeps only files so it opens only files
 @bot.command()
 async def friends(ctx):
     files = os.listdir(friends_directory)
@@ -137,28 +150,25 @@ async def music(ctx):
 #(PART 2) Have discord bot join VC. Note you must be in VC for it to join
 @bot.command(pass_context = True)
 async def join(ctx):
-    if (ctx.author.voice):
-        channel = ctx.message.author.voice.channel
-        voice = await channel.connect()
-        # if you check ffmpeg --version it will not show up. You need to add it to the path or point to the executable. I pointed mines
-        source = FFmpegPCMAudio('music/hello.mp3', executable=FFMPEG_PATH) # Plays this audio upon joining
-        ctx.voice_client.play(source)
-    else:
-        await ctx.send('You gotta be in VC so I can join panget!')
+    if not ctx.author.voice:
+        return await ctx.send('You gotta be in VC so I can join panget!')
+
+    if ctx.voice_client and ctx.voice_client.is_connected():
+        return await ctx.send('I am already in a voice channel.')
+
+    channel = ctx.message.author.voice.channel
+    await channel.connect()
+    await asyncio.sleep(0.5)  # Wait for the voice client to be fully connected
+
+    # if you check ffmpeg --version it will not show up. You need to add it to the path or point to the executable.
+    hello_mp3_path = os.path.join(os.path.dirname(__file__), 'music', 'hello.mp3')
+    source = FFmpegPCMAudio(hello_mp3_path, executable=FFMPEG_PATH)  # Plays this audio upon joining
+    ctx.voice_client.play(source)
 
 #(PART 3) Make discord bot leave VC
 @bot.command(pass_context = True)
 async def leave(ctx):
-    if (ctx.voice_client):
-        await ctx.guild.voice_client.disconnect()
-        await ctx.send('Adios :)')
-    else:
-        await ctx.send('Something went wrong and I cant leave')
-
-#(PART 3) Make discord bot leave VC
-@bot.command(pass_context = True)
-async def leave(ctx):
-    if (ctx.voice_client):
+    if ctx.voice_client:
         await ctx.guild.voice_client.disconnect()
         await ctx.send('Adios :)')
     else:
@@ -168,13 +178,16 @@ async def leave(ctx):
 @bot.command(pass_context = True)
 async def play(ctx, *, search: str = None):
     if not search:
-        return await ctx.send("Please provide a song name, like `!play name`.")
+        return await ctx.send("Please provide a song name, like `.play song_name`.")
 
     if not ctx.author.voice:
         return await ctx.send("You need to join a voice channel first.")
 
+    if ctx.voice_client is None:
+        return await ctx.send("I'm not connected to a voice channel. Use `.join` first.")
+
     # Search for file (case-insensitive match)
-    files = glob.glob(os.path.join(music_directory, "*.mp3"))
+    files = glob.glob(os.path.join(ipod_directory, "*.mp3"))
     match = next((f for f in files if search.lower() in os.path.basename(f).lower()), None)
 
     if not match:
@@ -270,7 +283,7 @@ async def email(ctx):
 # It unfortunately cannot play music through discord
 
 
-@bot.command(name="play")
+@bot.command(name="playsp")
 async def playsp(ctx, *, query: str):
     """Play a song on Spotify"""
     results = sp.search(q=query, type="track", limit=1)
