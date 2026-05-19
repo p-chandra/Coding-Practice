@@ -119,6 +119,21 @@ async def skincare(ctx):
 
     await ctx.send(skin_routine)
 
+#This command tells you what skin care you should use
+@bot.command(aliases=['suicide'])
+async def kms(ctx):
+    try:
+        with open('happy.txt', 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            selected_line = random.choice(lines).strip()
+
+    except FileNotFoundError:
+        await ctx.send('happy.txt not found.')
+        return
+
+    await ctx.send(selected_line)
+
+
 #This is just to show a picture of coconut. you can type .theboy or .cocoboy
 @bot.command(aliases=["theboy","cocoboy"])
 async def coconut(ctx):
