@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+* {
+  box-sizing: border-box;
+}
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0px;
+    background: rgb(255, 255, 255);
+}
+
+h1 { font-size: 45px; text-align:center; margin-bottom: 0px; }
+h2 { font-size: 30px; letter-spacing: 0.02em; margin: 5px 0px 0px 0px; text-align:center;}
+h3 { font-size: 20px; text-align:center; margin: 5px 0px 0px 0px;}
+p {font-size: 15px; margin: 2px 0px 0px 0px;}
+a{padding: 5px; font-size: 17px; color: white;}
+ul{text-align: center;}
+
+li{padding-bottom: 10px; font-size: 18px;}
+
+
+.header{
+    padding-top: 190px;
+    padding-left: 10px;
+    height: 300px;
+    text-align:left;
+    background-image:url(Images/DigitalHeader.jpg);
+    color: rgb(255, 255, 255);
+}
+
+.header h1 {
+    font-size: 45px;
+    margin-bottom: 0px;
+}
+
+.header p{
+    font-size: 20px;
+    margin: 0px;
+}
+
+/* Footer */
+.footer {
+  bottom: 0;
+  width:100%;
+  text-align: center;
+  background-color: rgb(0, 0, 0); 
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.1s;
+  width: 80%;
+  padding: 10px;
+  margin: 50px auto 50px auto;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  align-content: center;
+}
+
+.card:hover {box-shadow: 0 8px 12px 8px  #343535;}
+
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position:sticky;
+    position: -webkit-sticky;
+    top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+    float:right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Active/current link */
+.navbar a.active {
+    background-color: #666;
+    color: white;
+}
+
+.centerimage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+  font-size: 18px;
+  margin: 0px 70px 0px 70px;
+}
+
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 720px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+
+</style>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+    <div class="header">
+        <h1 style="text-align: left;">Pawan Chandra</h1>
+        <p>Diamond Bar, CA</p>
+    </div>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="Projects.html" >Project</a>
+        <a href="Work.html" class= "active">Work</a>
+    </div>
+       
+    <div class="card">
+        <img src="Images/happy.gif" class="centerimage" style="width: 125px;" />
+        <h1>Peraton</h1>
+        <h2>Cyber Systems Engineer (Clearence:TS)</h2>
+        <h3>February 2020 – Present</h3>
+        <br>
+        <p class="container"> At CalEPA I had the oppurtunity to work with their IT department and also shadow their Procurement division My responsibilites included:
+              <ul>
+                    <li>Learned the basics of radio frequency modulation, demodulation, MIL-STD 1553, and JANUS underwater communication.</li>
+                    <li>Helped analyze and create attack path analysis report for multiple military vehicles and sub systems</li>
+                    <li>Utilized Ghidra, IDA Pro, and Ridare2 to disassemble and debug code and firmware</li>
+              </ul>  
+        </p>
+        <br></br>
+    </div>
+
+    <div class="card">
+        <img src="Images/NG.png" class="centerimage" style="width: 125px;" />
+        <h1>Northrop Grumman</h1>
+        <h2>Associate Cyber Operations Engineer (Clearence:TS)</h2>
+        <h3>June 2019 – January 2020</h3>
+        <br>
+        <p class="container"> At Northop Grumman, I used my cyber security knowledge to analyze military aircraft hardware and software applications. My tasks included:
+              <ul>
+                    <li>Performed dynamic and static code analysis for many projects, reviewed over 1000s of lines of code.</li>
+                    <li>Reverse engineered firmware extracted from hardware, commonly written in PPC and X86.</li>
+                    <li>Studied UAV architecture and used that knowledge to perform vulnerbility analysis</li>
+                    <li>Setup, imaged, and created IP addresses/subnet masks for servers and operation boxes.</li>
+              </ul>  
+        </p>
+        <br></br>
+    </div>
+
+    <div class="card">
+        <img src="Images/calepa.png" class="centerimage" style="width: 100px;" />
+        <h1>California Environmental Protection Agency</h1>
+        <h2> IT and Procurement Intern</h2>
+        <h3>June 2017 – July 2018</h3>
+        <br>
+        <p class="container"> At CalEPA I had the oppurtunity to work with their IT department and also shadow their Procurement division My responsibilites included:
+              <ul>
+                    <li>Diagnosing and troubleshooting computing and network errors</li>
+                    <li>Managing customer's IT related issues through the ticketing system</li>
+                    <li>Imaging laptops, tablets, and desktops</li>
+                    <li>Create bids for hardware and software technologies for all CalEPA branches</li>
+                    <li>Introduced to Fi$CAL and documenting RFOs and RFQs</li>
+              </ul>  
+        </p>
+        <br></br>
+    </div>
+
+    <div class="card">
+        <img src="Images/homedepot.png" class="centerimage" style="width: 100px;" />
+        <h1>Home Depot</h1>
+        <h2>Seasonal Cashier</h2>
+        <h3>April 2015 – September 2015</h3>
+        <br>
+        <p class="container">
+            My role as a cashier at Home Depot meant I had to memorize the store layout and the names and functions of each object. My responsibilites included:
+            <ul>
+                <li>Monitoring and assisting customers at self checkout registers</li>
+                <li>Overseeing inventory</li>
+                <li>Working graveyard as a stock crew member</li>
+            </ul>
+        </p>
+        <br></br>
+    </div>
+
+    <div class="card">
+        <img src="Images/thundervalley.jpg" class="centerimage" style="width: 100px;" />
+        <h1>Thunder Valley Casino</h1>
+        <h2>Poker Clerk/Banker</h2>
+        <h3>March 2014 – November 2014</h3>
+        <br>
+        <p class="container" style="text-align: center;">
+              The poker room was a new addition to Thunder Valley Casino when I started. My position required:
+              <ul>
+                  <li>Adaptating to a fast and constantly changing workplace</li>
+                  <li>Knowledge of all varients of the classic poker games</li>
+                  <li>Handling large sums of money and paying out promotional victory hands</li>
+              </ul>  
+        </p>
+        <br></br>
+    </div>
+
+    <div class="card">
+        <img src="Images/kobra.jpg" class="centerimage" style="width: 100px;" />
+        <h1>Kobra Enterprise</h1>
+        <h2>Accounting Assitant</h2>
+        <h3>December 2012 – March 2014</h3>
+        <br>
+        <p class="container">
+            At Kobra Enterprise I learned about the complexity behind running a resturant business and the importance of balancing books. Some of my responsibilites included:
+            <ul>
+                <li>Working with Profit and Losses using the Quickbook Software</li>
+                <li>Helping with account receivable and payable </li>
+                <li>Dealing with 1000s of invoices per month</li>
+                <li>Creating paystubs for 100s of employees using Intuit Software.</li>
+            </ul> 
+        </p>
+        <br></br>
+    </div>
+
+    <div class="card">
+        <img src="Images/tacobell.jpg" class="centerimage" style="width: 100px;" />
+        <h1>Taco Bell</h1>
+        <h2>Cashier</h2>
+        <h3>December 2011 – December 2013</h3>
+        <br>
+        <p class="container">
+              At Taco Bell team work and communication was essential to sustain a stress-free environment. My responsibilites included:
+              <ul>
+                  <li>Maintaining a safe and clean lobby</li>
+                  <li>Washing dishes</li>
+                  <li>Meal preperation</li>
+                  <li>Handling cash, credit, or check transactions.</li>
+              </ul>  
+        </p>
+        <br></br>
+    </div>
+
+
+    <div class="footer">
+        <h3>Contact Me</h3>
+        <a href="https://www.linkedin.com/in/pawan-chandra-0b9037229/"><i class="fa fa-linkedin"></i></a>
+        <a href="https://github.com/p-chandra"><i class="fa fa-github"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <br>
+        <br>
+        <a href="Images/Pawan Chandra_Resume.pdf" download>
+            Download Resume
+          </a>
+        <p><b>Pawan.Prashil@outlook.com</b></p>
+    </div>
+    </body>
+</html>

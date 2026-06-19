@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+* {
+    box-sizing: border-box;
+    }
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0px;
+    background: rgb(255, 255, 255);
+    }
+
+h2{
+    font-size: 65px; 
+    margin-bottom: 10px;
+    }
+
+li{
+    padding-bottom: 10px; 
+    font-size: 17px;
+    }
+
+p {
+    font-size: 17px;
+    }
+
+a{
+    padding: 5px; 
+    font-size: 17px; 
+    color: white;
+    }
+
+.header{
+    padding-top: 190px;
+    padding-left: 10px;
+    height: 300px;
+    text-align:left;
+    text-shadow: rgb(255, 255, 255);
+    background-image:url(Images/DigitalHeader.jpg);
+    color: rgb(255, 255, 255)
+    }
+
+.header h1 {
+    font-size: 45px;
+    margin-bottom: 0px;
+    }
+
+.header p{
+    font-size: 20px;
+    margin: 0px;
+    }
+
+.footer {
+    bottom: 0;
+    width:100%;
+    text-align: center;
+    background-color: rgb(0, 0, 0); 
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    }
+
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position:sticky;
+    position: -webkit-sticky;
+    top: 0;
+    }
+
+.navbar a {
+    float:right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    }
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+    }
+
+.navbar a.active {
+    background-color: #666;
+    color: white;
+    }
+
+.row{
+    display: -ms-flexbox; 
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    }
+
+.side {
+    -ms-flex: 50%;
+    flex: 50%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    }
+
+.main {   
+    -ms-flex: 50%;
+    flex: 50%;
+    background-color: white;
+    padding: 20px;
+    }
+
+ @media screen and (max-width: 720px) {
+    .row {   
+        flex-direction: column;
+        }
+    }
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 720px) {
+    .navbar a {
+        float: none;
+        width: 100%;
+        }
+    }
+
+</style>
+
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <body>
+        <div class="header">
+            <h1>Pawan Chandra</h1>
+            <p>Diamond Bar, CA</p>
+        </div>
+        <div class="navbar">
+            <a href="index.html" class="active">Home</a>
+            <a href="Projects.html">Project</a>
+            <a href="Work.html">Work</a>
+        </div>
+        
+        <div style="color:#333; text-align:center; padding: 50px 0px 90px 0px; background-image: url(Images/Simple8.jpg);">
+            <h2>Masters of Science</h2><h3 style="font-size: 40px; margin: 5px;">Computer Science</h3>
+            <p>Currently in the masters program at California State University, Fullerton <b>Expected graduation: December 2023</b></p>
+            <img src="Images/csuf.png" style="width: 100px;">
+            <h2>Bachelors of Science</h2><h3 style="font-size: 40px; margin: 5px;">Computer Science</h3>
+            <p>I attended California State University, Sacramento from Fall of <b>August 2017</b> to Fall of <b>December 2019</b>.<br>I graduated with a Major GPA of 3.3</p>
+            <img src="Images/Sacramento.png" style="width: 100px;">
+        </div>
+
+        <div style="text-align: center;background-color: rgb(46, 49, 48); color:rgb(255, 255, 255);padding: 30px 30px 80px 30px;">
+            <h2 style="margin: 20px 0px 10px 0px;">Certificate</h2><h3 style="font-size: 40px; margin: 5px;"> Information Assurance and Security</h3>
+                <ul>
+                    <li style="padding-bottom: 0px;">Computer Network and Internet</li>
+                    <li style="padding-bottom: 0px;">Cryptography</li>
+                    <li style="padding-bottom: 0px;">System Attacks and Countermeasures</li>
+                    <li style="padding-bottom: 0px;">Digital Forensics</li>
+                </ul>
+                <p>Designation conferred by the National Security Agency and Department of Homeland Security for Academic years 2017 - 2022.<br><b>CNSS 4011 and 4012</b></p>
+        </div>
+        
+        
+            <div class="row">
+                <div class="main" style="padding: 0px 30px 40px 30px; text-align: center;border: 5px solid rgb(46, 49, 48);">
+                    <h2>Activites</h2>
+                        <p><b>Association for Computer Machinery (ACM)</b></p>
+                        <p>Joining ACM gave me the oppurtunity to meet and work with many CS students and alumni. I participated in a semester long hackathon project and learned essential career skills.</p>
+                        <p><b>International Collegiate Programming Contest (ICPC)</b></p>
+                        <p>ICPC was an amazing experience. Out of 40 plus teams, my team placed in 12th. I helped break down and debug problems while our fastest typist (Talal) code the solution in Java</p>
+                </div>
+
+                <div class="side" style="padding: 0px 30px 40px 30px; text-align: center;border: 5px solid rgb(46, 49, 48);"> 
+                    <h2>About Me</h2>   
+                    <p>Originally from Fiji Island, I moved to America when I was 10 years old. 
+                            Finished both high school and college in Sacramento and moved to Southern California 
+                            upon gradutaion. Some of my hobbies include: tennis, snowboarding, video games, cooking, wood work, cars, and programming.
+                        </p>
+                        <p><b>Career Goals</b></p>
+                        <p> I never got exposure to embedded systems as a Computer Science student. My goal is to be a developer in the hardware side of things,
+                         to gain exposure on embedded systems, program using C, work on a linux environment, and or learn to script using Python.
+                        </p>
+                </div>
+            </div>
+              
+
+        <div class="footer">
+            <h3>Contact Me</h3>
+            <a href="https://www.linkedin.com/in/pawan-chandra-0b9037229/"><i class="fa fa-linkedin"></i></a>
+            <a href="https://github.com/p-chandra"><i class="fa fa-github"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <br>
+            <br>
+            <a href="Images/Pawan Chandra_Resume.pdf" download>
+                Download Resume
+              </a>
+            <p><b>Pawan.Prashil@outlook.com</b></p>
+        </div>
+    </body>
+</html>
